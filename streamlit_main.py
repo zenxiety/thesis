@@ -90,13 +90,12 @@ def get_lbp(img, uniform=True):
 
 # - - - - userR interRface - - - -
 
-st.set_page_config(page_title="brrrRRAain", layout="centered")
-st.title("brrrRRAain!! 🧠🧟‍♂️")
-st.caption("give us yourR brRain and we will analyze ittt 🔍🤤")
+st.set_page_config(page_title="brrrRRAain", layout="centered", page_icon="🧟‍♂️")
+st.title("🧠 we want brrrRRAainsss!! 🧟‍♂️")
 
 model = load_model("best_svm.pkl")
 
-img = st.file_uploader("brRain yourR wherRe", type=["jpg", "jpeg", "png"])
+img = st.file_uploader("send us yourR brRain pic and we will analyze its quality ggrRRrr", type=["jpg", "jpeg", "png"])
     
 if(img):
     img_bytes = np.asarray(bytearray(img.read()), dtype=np.uint8)
@@ -120,11 +119,11 @@ if(img):
     prediction = model["model"].predict([hist_lbpu])[0]
     label = CLASSES[prediction].title()
 
-    st.subheader("ourR analyzerR rResult")
-    st.success(f"⚠️ yourR brRain has {label.lower().replace("_", " ")} 🍽️😋")
+    st.subheader("🍽️ ourR analyzerR rResult 😋")
+    st.success(f"yourR brRain has {label.lower().replace("_", " ")}")
 
-    st.subheader("prRobability of ourR brRain analyzerR prRedictionnn")
+    st.subheader("😱 prRobability of ourR brRain analyzerR prRediction ⁉️")
     st.caption("ourR confidence level for each pRredictions of your brRainnn")
     if(hasattr(model["model"].best_estimator_, "predict_proba")):
         proba = model["model"].predict_proba([hist_lbpu])[0]
-        st.bar_chart({CLASSES[i].title(): proba[i] for i in range(4)})
+        st.bar_chart({CLASSES[i].title().lower(): proba[i] for i in range(4)}, horizontal=True)
